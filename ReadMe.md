@@ -1,5 +1,6 @@
 # textlint-rule-ginger
 
+[![textlint rule](https://img.shields.io/badge/textlint-fixable-green.svg?style=social)](https://textlint.github.io/)
 [![Build Status](https://travis-ci.org/nodaguti/textlint-rule-ginger.svg?branch=master)](https://travis-ci.org/nodaguti/textlint-rule-ginger)
 [![Dependency Status](https://david-dm.org/nodaguti/textlint-rule-ginger.svg)](https://david-dm.org/nodaguti/textlint-rule-ginger)
 [![devDependency Status](https://david-dm.org/nodaguti/textlint-rule-ginger/dev-status.svg)](https://david-dm.org/nodaguti/textlint-rule-ginger#info=devDependencies)
@@ -15,5 +16,5 @@ $ npm install textlint-rule-ginger
 ## Usage
 ```
 $ npm install textlint textlint-rule-ginger
-$ textlint --rule textlint-rule-ginger some-text-to-proofread.txt
+$ textlint --rule textlint-rule-ginger text-to-proofread.txt
 ```
