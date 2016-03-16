@@ -16,6 +16,9 @@
   ],
   "author": "nodaguti",
   "license": "MIT",
+  "bugs": "https://github.com/nodaguti/textlint-rule-ginger/issues",
+  "homepage": "https://github.com/nodaguti/textlint-rule-ginger",
+  "repository": "nodaguti/textlint-rule-ginger",
   "dependencies": {
     "es6-promisify": "^3.0.0",
     "gingerbread": "^0.5.0",
