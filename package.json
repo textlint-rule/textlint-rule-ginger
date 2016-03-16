@@ -6,7 +6,9 @@
   "scripts": {
     "build": "babel src -d lib --source-maps",
     "prepublish": "npm run --if-present build",
-    "test": "mocha"
+    "test": "npm-run-all lint mocha",
+    "lint": "eslint src test",
+    "mocha": "mocha"
   },
   "keywords": [
     "textlint",
@@ -22,6 +24,7 @@
   "dependencies": {
     "es6-promisify": "^3.0.0",
     "gingerbread": "^0.5.0",
+    "npm-run-all": "^1.5.3",
     "textlint-rule-helper": "^1.1.5"
   },
   "devDependencies": {
