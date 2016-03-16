@@ -1,0 +1,38 @@
+{
+  "name": "textlint-rule-ginger",
+  "version": "0.1.0",
+  "description": "textlint rule to check your English grammar with Ginger Proofreading",
+  "main": "lib/ginger.js",
+  "scripts": {
+    "build": "babel src -d lib --source-maps",
+    "prepublish": "npm run --if-present build",
+    "test": "mocha"
+  },
+  "keywords": [
+    "textlint",
+    "rule",
+    "english",
+    "proofreading"
+  ],
+  "author": "nodaguti",
+  "license": "MIT",
+  "dependencies": {
+    "es6-promisify": "^3.0.0",
+    "gingerbread": "^0.5.0",
+    "textlint-rule-helper": "^1.1.5"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.6.5",
+    "babel-core": "^6.7.2",
+    "babel-eslint": "^5.0.0",
+    "babel-plugin-espower": "^2.1.2",
+    "babel-preset-es2015": "^6.6.0",
+    "eslint": "~2.2.0",
+    "eslint-config-airbnb": "^6.1.0",
+    "kneden": "^1.0.2",
+    "mocha": "^2.4.5",
+    "power-assert": "^1.3.1",
+    "textlint": "^5.7.0",
+    "textlint-tester": "^1.0.0"
+  }
+}
