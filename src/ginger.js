@@ -2,7 +2,7 @@ import { RuleHelper } from 'textlint-rule-helper';
 import gingerbread from 'gingerbread';
 import promisify from 'es6-promisify';
 import StringSource from 'textlint-util-to-string';
-import filter from 'unist-util-filter';
+import map from 'unist-util-map';
 
 const gingerbreadAsync = promisify(gingerbread);
 
@@ -26,14 +26,13 @@ function filterNode({ node, context }) {
     return null;
   }
 
-  const filteredNode = filter(node, (n) =>
-    n.type !== Syntax.Code &&
-    n.type !== Syntax.Link
-  );
-
-  if (!filteredNode) {
-    return null;
-  }
+  const filteredNode = map(node, (n) => {
+    // Replace the value of inline code with a dummy text.
+    if (n.type === Syntax.Code) {
+      return Object.assign({}, n, { value: 'code' });
+    }
+    return n;
+  });
 
   const source = new StringSource(filteredNode);
   const text = source.toString();

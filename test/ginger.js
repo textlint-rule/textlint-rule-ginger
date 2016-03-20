@@ -7,7 +7,6 @@ tester.run('ginger', rule, {
   valid: [
     'Hello, world!',
     'This sentence contains no mistakes.',
-    'This link contains an [errror](index.html) but it should be ignored.',
     'Misspellings in inline `codee` should be ignored.',
   ],
   invalid: [
@@ -29,6 +28,17 @@ tester.run('ginger', rule, {
           message: 'bring -> brings',
           line: 1,
           column: 22,
+        },
+      ],
+    },
+    {
+      text: 'This link contains an [errror](index.html).',
+      output: 'This link contains an [error](index.html).',
+      errors: [
+        {
+          message: 'errror -> error',
+          line: 1,
+          column: 24,
         },
       ],
     },
