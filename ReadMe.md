@@ -19,6 +19,20 @@ $ npm install textlint textlint-rule-ginger
 $ textlint --rule textlint-rule-ginger text-to-proofread.txt
 ```
 
+## Notes
+All inline scripts are replaced with `code` before linting with Ginger.
+
+For example, a sentence
+```
+The available options are `--foo`, `--bar`, and `--baz`.
+```
+is changed into the following:
+```
+The available options are code, code, and code.
+```
+
+So please just ignore errors according to this replacement.
+
 ## Tests
 ```
 npm test
