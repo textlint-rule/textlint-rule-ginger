@@ -1,27 +1,63 @@
 import { RuleHelper } from 'textlint-rule-helper';
 import gingerbread from 'gingerbread';
 import promisify from 'es6-promisify';
+import StringSource from 'textlint-util-to-string';
+import filter from 'unist-util-filter';
 
 const gingerbreadAsync = promisify(gingerbread);
+
+/**
+ * Exclude inappropriate parts of text from linting,
+ * such as link texts, image captions, blockquotes, emphasized texts and inline code.
+ * @param {TxtNode} node
+ * @param {TextLintContext} context
+ * @return {{ source: StringSource, text: string }}
+ */
+function filterNode({ node, context }) {
+  const { Syntax } = context;
+  const helper = new RuleHelper(context);
+
+  if (helper.isChildNode(node, [
+    Syntax.Link,
+    Syntax.Image,
+    Syntax.BlockQuote,
+    Syntax.Emphasis,
+  ])) {
+    return null;
+  }
+
+  const filteredNode = filter(node, (n) =>
+    n.type !== Syntax.Code &&
+    n.type !== Syntax.Link
+  );
+
+  if (!filteredNode) {
+    return null;
+  }
+
+  const source = new StringSource(filteredNode);
+  const text = source.toString();
+
+  return { source, text };
+}
 
 function reporter(context) {
   const {
     Syntax,
-    getSource,
     report,
     RuleError,
     fixer,
   } = context;
-  const helper = new RuleHelper(context);
 
   return {
     [Syntax.Paragraph](node) {
-      if (helper.isChildNode(node, [Syntax.BlockQuote])) {
-        return null;
-      }
-
       return (async () => {
-        const text = getSource(node);
+        const { source, text } = filterNode({ node, context }) || {};
+
+        if (!source || !text) {
+          return;
+        }
+
         const [
           original,
           gingered,
@@ -35,11 +71,19 @@ function reporter(context) {
 
         corrections.forEach((correction) => {
           const index = correction.start;
-          const range = [index, index + correction.length];
+          const originalPosition = source.originalPositionFromIndex(index);
+          const originalRange = [
+            originalPosition.column,
+            originalPosition.column + correction.length,
+          ];
+          const fix = fixer.replaceTextRange(originalRange, correction.correct);
           const message = `${correction.text} -> ${correction.correct}`;
-          const fix = fixer.replaceTextRange(range, correction.correct);
 
-          report(node, new RuleError(message, { index, fix }));
+          report(node, new RuleError(message, {
+            line: originalPosition.line - 1,
+            column: originalPosition.column,
+            fix,
+          }));
         });
       })();
     },
