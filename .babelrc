@@ -3,7 +3,7 @@
     "es2015"
   ],
   "plugins": [
-    "kneden",
+    "async-to-promises",
     "babel-plugin-espower"
   ]
 }
