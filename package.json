@@ -33,7 +33,7 @@
     "unist-util-map": "^1.0.1"
   },
   "devDependencies": {
-    "babel-cli": "^6.6.5",
+    "babel-cli": "^6.8.0",
     "babel-core": "^6.7.4",
     "babel-eslint": "^6.0.0",
     "babel-plugin-async-to-promises": "^1.0.4",
