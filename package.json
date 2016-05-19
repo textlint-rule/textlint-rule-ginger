@@ -26,7 +26,7 @@
   "homepage": "https://github.com/nodaguti/textlint-rule-ginger",
   "repository": "nodaguti/textlint-rule-ginger",
   "dependencies": {
-    "es6-promisify": "^3.0.0",
+    "es6-promisify": "^4.1.0",
     "gingerbread": "^0.5.0",
     "textlint-rule-helper": "^1.1.5",
     "textlint-util-to-string": "^1.2.0",
