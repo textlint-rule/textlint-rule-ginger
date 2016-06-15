@@ -1,10 +1,10 @@
-import { RuleHelper } from 'textlint-rule-helper';
+import { RuleHelper, IgnoreNodeManger } from 'textlint-rule-helper';
 import gingerbread from 'gingerbread';
 import promisify from 'es6-promisify';
 import StringSource from 'textlint-util-to-string';
 import map from 'unist-util-map';
-
-const gingerbreadAsync = promisify(gingerbread);
+const ignoreNodeManager = new IgnoreNodeManger();
+const gingerbreadAsync = promisify(gingerbread, {multiArgs: true});
 
 /**
  * Exclude inappropriate parts of text from linting,
@@ -16,7 +16,6 @@ const gingerbreadAsync = promisify(gingerbread);
 function filterNode({ node, context }) {
   const { Syntax } = context;
   const helper = new RuleHelper(context);
-
   if (helper.isChildNode(node, [
     Syntax.Link,
     Syntax.Image,
@@ -26,15 +25,10 @@ function filterNode({ node, context }) {
     return null;
   }
 
-  const filteredNode = map(node, (n) => {
-    // Replace the value of inline code with a dummy text.
-    if (n.type === Syntax.Code) {
-      return Object.assign({}, n, { value: 'code' });
-    }
-    return n;
-  });
+  // ignore Code type node
+  ignoreNodeManager.ignoreChildrenByTypes(node, [Syntax.Code]);
 
-  const source = new StringSource(filteredNode);
+  const source = new StringSource(node);
   const text = source.toString();
 
   return { source, text };
@@ -75,6 +69,10 @@ function reporter(context) {
             originalPosition.column,
             originalPosition.column + correction.length,
           ];
+          // if range is ignored, not report
+          if(ignoreNodeManager.isIgnoredRange(originalRange)){
+            return;
+          }
           const fix = fixer.replaceTextRange(originalRange, correction.correct);
           const message = `${correction.text} -> ${correction.correct}`;
 
