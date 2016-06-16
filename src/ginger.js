@@ -1,8 +1,8 @@
-import { RuleHelper, IgnoreNodeManger } from 'textlint-rule-helper';
+import { RuleHelper, IgnoreNodeManager } from 'textlint-rule-helper';
 import gingerbread from 'gingerbread';
 import promisify from 'es6-promisify';
 import StringSource from 'textlint-util-to-string';
-const ignoreNodeManager = new IgnoreNodeManger();
+const ignoreNodeManager = new IgnoreNodeManager();
 const gingerbreadAsync = promisify(gingerbread, { multiArgs: true });
 
 /**
