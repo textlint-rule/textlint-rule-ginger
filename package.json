@@ -1,6 +1,6 @@
 {
   "name": "textlint-rule-ginger",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "textlint rule to check your English grammar with Ginger Proofreading",
   "main": "lib/ginger.js",
   "scripts": {
