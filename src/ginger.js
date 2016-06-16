@@ -2,9 +2,8 @@ import { RuleHelper, IgnoreNodeManger } from 'textlint-rule-helper';
 import gingerbread from 'gingerbread';
 import promisify from 'es6-promisify';
 import StringSource from 'textlint-util-to-string';
-import map from 'unist-util-map';
 const ignoreNodeManager = new IgnoreNodeManger();
-const gingerbreadAsync = promisify(gingerbread, {multiArgs: true});
+const gingerbreadAsync = promisify(gingerbread, { multiArgs: true });
 
 /**
  * Exclude inappropriate parts of text from linting,
@@ -69,10 +68,12 @@ function reporter(context) {
             originalPosition.column,
             originalPosition.column + correction.length,
           ];
+
           // if range is ignored, not report
-          if(ignoreNodeManager.isIgnoredRange(originalRange)){
+          if (ignoreNodeManager.isIgnoredRange(originalRange)) {
             return;
           }
+
           const fix = fixer.replaceTextRange(originalRange, correction.correct);
           const message = `${correction.text} -> ${correction.correct}`;
 
