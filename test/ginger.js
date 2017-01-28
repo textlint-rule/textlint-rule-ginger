@@ -1,5 +1,5 @@
-import rule from '../src/ginger';
 import TextlintTester from 'textlint-tester';
+import rule from '../src/ginger';
 
 const tester = new TextlintTester();
 

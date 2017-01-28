@@ -2,6 +2,7 @@ import { RuleHelper, IgnoreNodeManager } from 'textlint-rule-helper';
 import gingerbread from 'gingerbread';
 import promisify from 'es6-promisify';
 import StringSource from 'textlint-util-to-string';
+
 const ignoreNodeManager = new IgnoreNodeManager();
 const gingerbreadAsync = promisify(gingerbread, { multiArgs: true });
 
@@ -64,12 +65,13 @@ function reporter(context) {
         corrections.forEach((correction) => {
           const index = correction.start;
           const originalPosition = source.originalPositionFromIndex(index);
+          console.log(originalPosition);
           const originalRange = [
             originalPosition.column,
             originalPosition.column + correction.length,
           ];
 
-          // if range is ignored, not report
+          // if range is ignored, skip reporting
           if (ignoreNodeManager.isIgnoredRange(originalRange)) {
             return;
           }
