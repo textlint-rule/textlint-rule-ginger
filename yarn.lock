@@ -2827,9 +2827,9 @@ textlint-tester@^2.1.0:
   dependencies:
     textlint "^7.0.0"
 
-textlint-util-to-string@^2.0.1:
-  version "2.0.1"
-  resolved "https://registry.yarnpkg.com/textlint-util-to-string/-/textlint-util-to-string-2.0.1.tgz#094d9daedb87e72e5aeeeb0f6ba21961ff353279"
+textlint-util-to-string@^2.0.2:
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/textlint-util-to-string/-/textlint-util-to-string-2.0.2.tgz#e9ec5ddc60e5aeb6c52de209c74650354b92304f"
   dependencies:
     object-assign "^4.0.1"
     structured-source "^3.0.2"
