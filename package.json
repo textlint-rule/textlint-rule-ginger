@@ -2,6 +2,9 @@
   "name": "textlint-rule-ginger",
   "version": "2.0.1",
   "description": "textlint rule to check your English grammar with Ginger Proofreading",
+  "engines": {
+    "node": ">=6"
+  },
   "main": "lib/ginger.js",
   "scripts": {
     "build": "babel src -d lib --source-maps",
@@ -26,25 +29,21 @@
   "homepage": "https://github.com/nodaguti/textlint-rule-ginger",
   "repository": "nodaguti/textlint-rule-ginger",
   "dependencies": {
-    "es6-promisify": "^4.1.0",
+    "es6-promisify": "^5.0.0",
     "gingerbread": "^0.5.0",
     "textlint-rule-helper": "^2.0.0",
-    "textlint-util-to-string": "^1.2.1"
+    "textlint-util-to-string": "^2.0.2"
   },
   "devDependencies": {
     "babel-cli": "^6.10.1",
     "babel-core": "^6.9.1",
-    "babel-eslint": "^6.0.4",
-    "babel-plugin-async-to-promises": "^1.0.5",
-    "babel-plugin-espower": "^2.2.0",
-    "babel-preset-es2015": "^6.9.0",
-    "eslint": "^3.0.0",
-    "eslint-config-airbnb": "^9.0.1",
-    "eslint-plugin-import": "^1.8.1",
-    "mocha": "^2.5.3",
-    "npm-run-all": "^2.1.2",
-    "power-assert": "^1.4.1",
-    "textlint": "^7.0.0",
-    "textlint-tester": "^2.0.0"
+    "babel-preset-env": "^1.1.8",
+    "eslint": "^3.14.1",
+    "eslint-config-airbnb-base": "^11.0.1",
+    "eslint-plugin-import": "^2.2.0",
+    "mocha": "^3.2.0",
+    "npm-run-all": "^4.0.1",
+    "textlint": "^7.2.1",
+    "textlint-tester": "^2.1.0"
   }
 }
