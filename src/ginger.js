@@ -65,7 +65,6 @@ function reporter(context) {
         corrections.forEach((correction) => {
           const index = correction.start;
           const originalPosition = source.originalPositionFromIndex(index);
-          console.log(originalPosition);
           const originalRange = [
             originalPosition.column,
             originalPosition.column + correction.length,
