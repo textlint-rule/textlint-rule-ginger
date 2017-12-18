@@ -1,7 +1,8 @@
 {
   "name": "textlint-rule-ginger",
   "version": "2.1.0",
-  "description": "textlint rule to check your English grammar with Ginger Proofreading",
+  "description":
+    "textlint rule to check your English grammar with Ginger Proofreading",
   "engines": {
     "node": ">=6"
   },
@@ -11,18 +12,12 @@
     "prepublish": "npm run --if-present build",
     "test": "npm-run-all lint mocha",
     "lint": "eslint src test",
-    "mocha": "mocha"
+    "mocha": "mocha",
+    "precommit": "lint-staged",
+    "prettier": "prettier --write \"**/*.{js,json,md}\""
   },
-  "files": [
-    "lib",
-    "src"
-  ],
-  "keywords": [
-    "textlint",
-    "rule",
-    "english",
-    "proofreading"
-  ],
+  "files": ["lib", "src"],
+  "keywords": ["textlint", "rule", "english", "proofreading"],
   "author": "nodaguti",
   "license": "MIT",
   "bugs": "https://github.com/nodaguti/textlint-rule-ginger/issues",
@@ -40,10 +35,18 @@
     "babel-preset-env": "^1.6.1",
     "eslint": "^4.13.1",
     "eslint-config-airbnb-base": "^12.1.0",
+    "eslint-config-prettier": "^2.9.0",
     "eslint-plugin-import": "^2.8.0",
+    "husky": "^0.14.3",
+    "lint-staged": "^6.0.0",
     "mocha": "^4.0.1",
     "npm-run-all": "^4.1.2",
+    "prettier": "^1.9.2",
     "textlint": "^9.1.1",
     "textlint-tester": "^3.0.3"
+  },
+  "lint-staged": {
+    "*.js": ["prettier", "git add"],
+    "*.json": ["prettier", "git add"]
   }
 }
