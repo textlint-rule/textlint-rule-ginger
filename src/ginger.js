@@ -16,12 +16,14 @@ const gingerbreadAsync = promisify(gingerbread, { multiArgs: true });
 function filterNode({ node, context }) {
   const { Syntax } = context;
   const helper = new RuleHelper(context);
-  if (helper.isChildNode(node, [
-    Syntax.Link,
-    Syntax.Image,
-    Syntax.BlockQuote,
-    Syntax.Emphasis,
-  ])) {
+  if (
+    helper.isChildNode(node, [
+      Syntax.Link,
+      Syntax.Image,
+      Syntax.BlockQuote,
+      Syntax.Emphasis,
+    ])
+  ) {
     return null;
   }
 
@@ -35,12 +37,7 @@ function filterNode({ node, context }) {
 }
 
 function reporter(context) {
-  const {
-    Syntax,
-    report,
-    RuleError,
-    fixer,
-  } = context;
+  const { Syntax, report, RuleError, fixer } = context;
 
   return {
     [Syntax.Paragraph](node) {
@@ -51,11 +48,7 @@ function reporter(context) {
           return;
         }
 
-        const [
-          original,
-          gingered,
-          corrections,
-        ] = await gingerbreadAsync(text);
+        const [original, gingered, corrections] = await gingerbreadAsync(text);
 
         // when no errors.
         if (original === gingered) {
@@ -78,11 +71,14 @@ function reporter(context) {
           const fix = fixer.replaceTextRange(originalRange, correction.correct);
           const message = `${correction.text} -> ${correction.correct}`;
 
-          report(node, new RuleError(message, {
-            line: originalPosition.line - 1,
-            column: originalPosition.column,
-            fix,
-          }));
+          report(
+            node,
+            new RuleError(message, {
+              line: originalPosition.line - 1,
+              column: originalPosition.column,
+              fix,
+            }),
+          );
         });
       })();
     },

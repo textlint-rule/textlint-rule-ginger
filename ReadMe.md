@@ -9,17 +9,20 @@
 to check your English grammar with [Ginger Proofreading](http://www.gingersoftware.com/proofreading).
 
 ## Installation
+
 ```
 $ npm install textlint-rule-ginger
 ```
 
 ## Usage
+
 ```
 $ npm install textlint textlint-rule-ginger
 $ textlint --rule textlint-rule-ginger text-to-proofread.txt
 ```
 
 ## Tests
+
 ```
 npm test
 ```
