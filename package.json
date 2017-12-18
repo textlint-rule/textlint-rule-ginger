@@ -1,6 +1,6 @@
 {
   "name": "textlint-rule-ginger",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "description":
     "textlint rule to check your English grammar with Ginger Proofreading",
   "engines": {
@@ -20,9 +20,9 @@
   "keywords": ["textlint", "rule", "english", "proofreading"],
   "author": "nodaguti",
   "license": "MIT",
-  "bugs": "https://github.com/nodaguti/textlint-rule-ginger/issues",
-  "homepage": "https://github.com/nodaguti/textlint-rule-ginger",
-  "repository": "nodaguti/textlint-rule-ginger",
+  "bugs": "https://github.com/textlint-rule/textlint-rule-ginger/issues",
+  "homepage": "https://github.com/textlint-rule/textlint-rule-ginger",
+  "repository": "textlint-rule/textlint-rule-ginger",
   "dependencies": {
     "es6-promisify": "^5.0.0",
     "gingerbread": "^0.5.0",

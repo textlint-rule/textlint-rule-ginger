@@ -2,9 +2,9 @@
 
 [![textlint rule](https://img.shields.io/badge/textlint-fixable-green.svg?style=social)](https://textlint.github.io/)
 [![npm](https://img.shields.io/npm/v/textlint-rule-ginger.svg)](https://www.npmjs.com/package/textlint-rule-ginger)
-[![Build Status](https://travis-ci.org/nodaguti/textlint-rule-ginger.svg?branch=master)](https://travis-ci.org/nodaguti/textlint-rule-ginger)
-[![Dependency Status](https://david-dm.org/nodaguti/textlint-rule-ginger.svg)](https://david-dm.org/nodaguti/textlint-rule-ginger)
-[![devDependency Status](https://david-dm.org/nodaguti/textlint-rule-ginger/dev-status.svg)](https://david-dm.org/nodaguti/textlint-rule-ginger#info=devDependencies)
+[![Build Status](https://travis-ci.org/textlint-rule/textlint-rule-ginger.svg?branch=master)](https://travis-ci.org/textlint-rule/textlint-rule-ginger)
+[![Dependency Status](https://david-dm.org/textlint-rule/textlint-rule-ginger.svg)](https://david-dm.org/textlint-rule/textlint-rule-ginger)
+[![devDependency Status](https://david-dm.org/textlint-rule/textlint-rule-ginger/dev-status.svg)](https://david-dm.org/textlint-rule/textlint-rule-ginger#info=devDependencies)
 
 [textlint](https://github.com/textlint/textlint) rule
 to check your English grammar with [Ginger Proofreading](http://www.gingersoftware.com/proofreading).
