@@ -36,7 +36,7 @@ function filterNode({ node, context }) {
   return { source, text };
 }
 
-function reporter(context, options={ skipRegExps: [] }) {
+function reporter(context, options = { skipRegExps: [] }) {
   const { Syntax, report, RuleError, fixer } = context;
 
   return {
@@ -55,33 +55,41 @@ function reporter(context, options={ skipRegExps: [] }) {
           return;
         }
 
-        corrections.filter((correction) => (
-          !options.skipRegExps.some((r) => RegExp(r).test(correction))
-        )).forEach((correction) => {
-          const index = correction.start;
-          const originalPosition = source.originalPositionFromIndex(index);
-          const originalRange = [
-            originalPosition.column,
-            originalPosition.column + correction.length,
-          ];
+        corrections
+          .filter(
+            (correction) =>
+              !options.skipRegExps.some((skipRegExp) =>
+                RegExp(skipRegExp).test(correction.text),
+              ),
+          )
+          .forEach((correction) => {
+            const index = correction.start;
+            const originalPosition = source.originalPositionFromIndex(index);
+            const originalRange = [
+              originalPosition.column,
+              originalPosition.column + correction.length,
+            ];
 
-          // if range is ignored, skip reporting
-          if (ignoreNodeManager.isIgnoredRange(originalRange)) {
-            return;
-          }
+            // if range is ignored, skip reporting
+            if (ignoreNodeManager.isIgnoredRange(originalRange)) {
+              return;
+            }
 
-          const fix = fixer.replaceTextRange(originalRange, correction.correct);
-          const message = `${correction.text} -> ${correction.correct}`;
+            const fix = fixer.replaceTextRange(
+              originalRange,
+              correction.correct,
+            );
+            const message = `${correction.text} -> ${correction.correct}`;
 
-          report(
-            node,
-            new RuleError(message, {
-              line: originalPosition.line - 1,
-              column: originalPosition.column,
-              fix,
-            }),
-          );
-        });
+            report(
+              node,
+              new RuleError(message, {
+                line: originalPosition.line - 1,
+                column: originalPosition.column,
+                fix,
+              }),
+            );
+          });
       })();
     },
   };
