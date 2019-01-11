@@ -32,7 +32,6 @@ You can set words to skip assertion with the regular expression.
 }
 ```
 
-
 ## Tests
 
 ```
