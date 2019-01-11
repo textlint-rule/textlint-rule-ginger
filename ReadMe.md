@@ -22,6 +22,17 @@ $ npm install textlint textlint-rule-ginger
 $ textlint --rule textlint-rule-ginger text-to-proofread.txt
 ```
 
+You can set words to skip assertion with the regular expression.
+
+```json
+"rule": {
+  "ginger": {
+    "skipRegExps": ["[Jj]ava *[Ss]cript"]
+  }
+}
+```
+
+
 ## Tests
 
 ```
