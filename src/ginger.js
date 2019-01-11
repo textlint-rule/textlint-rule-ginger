@@ -36,7 +36,7 @@ function filterNode({ node, context }) {
   return { source, text };
 }
 
-function reporter(context) {
+function reporter(context, options={ skipRegExps: [] }) {
   const { Syntax, report, RuleError, fixer } = context;
 
   return {
@@ -55,7 +55,9 @@ function reporter(context) {
           return;
         }
 
-        corrections.forEach((correction) => {
+        corrections.filter((correction) => (
+          !options.skipRegExps.some((r) => RegExp(r).test(correction))
+        )).forEach((correction) => {
           const index = correction.start;
           const originalPosition = source.originalPositionFromIndex(index);
           const originalRange = [
