@@ -36,7 +36,8 @@ function filterNode({ node, context }) {
   return { source, text };
 }
 
-function reporter(context, options = { skipRegExps: [] }) {
+function reporter(context, options = {}) {
+  const opts = Object.assign({ skipRegExps: [] }, options);
   const { Syntax, report, RuleError, fixer } = context;
 
   return {
@@ -58,7 +59,7 @@ function reporter(context, options = { skipRegExps: [] }) {
         corrections
           .filter(
             (correction) =>
-              !options.skipRegExps.some((skipRegExp) =>
+              !opts.skipRegExps.some((skipRegExp) =>
                 RegExp(skipRegExp).test(correction.text),
               ),
           )
