@@ -32,11 +32,11 @@ For more details about regexp-like string, see [@textlint/regexp-string-matcher]
 
 ```json
 {
-    "rule": {
-      "ginger": {
-        "skipPatterns": ["/JavaScript/i"]
-      }
+  "rule": {
+    "ginger": {
+      "skipPatterns": ["/JavaScript/i"]
     }
+  }
 }
 ```
 
