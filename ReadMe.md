@@ -29,7 +29,7 @@ $ textlint --rule textlint-rule-ginger text-to-proofread.txt
 
 You can set regexp-like string as skip patterns.
 
-For more details about regexp-like string, see [@textlint/regexp-string-matcher](https://github.com/textlint/regexp-string-matcher)
+For more details about regexp-like string, please see [RegExp-like String](https://github.com/textlint/regexp-string-matcher#regexp-like-string)
 
 ```json
 {
