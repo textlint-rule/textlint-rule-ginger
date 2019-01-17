@@ -27,7 +27,7 @@ You can set words to skip assertion with the regular expression.
 ```json
 "rule": {
   "ginger": {
-    "skipRegExps": ["[Jj]ava *[Ss]cript"]
+    "skipPatterns": ["/[Jj]ava *[Ss]cript/"]
   }
 }
 ```
