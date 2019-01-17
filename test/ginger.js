@@ -11,7 +11,7 @@ tester.run('ginger', rule, {
     {
       text: 'This link does not contain an [errror](index.html).',
       options: {
-        skipRegExps: ['err+or'],
+        skipPatterns: ['/err+or/'],
       },
     },
   ],

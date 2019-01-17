@@ -2,6 +2,7 @@ import { RuleHelper, IgnoreNodeManager } from 'textlint-rule-helper';
 import gingerbread from 'gingerbread';
 import promisify from 'es6-promisify';
 import StringSource from 'textlint-util-to-string';
+import { matchPatterns } from '@textlint/regexp-string-matcher';
 
 const ignoreNodeManager = new IgnoreNodeManager();
 const gingerbreadAsync = promisify(gingerbread, { multiArgs: true });
@@ -37,7 +38,7 @@ function filterNode({ node, context }) {
 }
 
 function reporter(context, options = {}) {
-  const opts = Object.assign({ skipRegExps: [] }, options);
+  const opts = Object.assign({ skipPatterns: [] }, options);
   const { Syntax, report, RuleError, fixer } = context;
 
   return {
@@ -50,6 +51,7 @@ function reporter(context, options = {}) {
         }
 
         const [original, gingered, corrections] = await gingerbreadAsync(text);
+        const results = matchPatterns(text, opts.skipPatterns);
 
         // when no errors.
         if (original === gingered) {
@@ -59,8 +61,10 @@ function reporter(context, options = {}) {
         corrections
           .filter(
             (correction) =>
-              !opts.skipRegExps.some((skipRegExp) =>
-                RegExp(skipRegExp).test(correction.text),
+              !results.some(
+                (result) =>
+                  result.startIndex >= correction.start &&
+                  correction.start + correction.length <= result.endIndex,
               ),
           )
           .forEach((correction) => {
