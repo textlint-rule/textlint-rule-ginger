@@ -2,6 +2,7 @@ import { RuleHelper, IgnoreNodeManager } from 'textlint-rule-helper';
 import gingerbread from 'gingerbread';
 import promisify from 'es6-promisify';
 import StringSource from 'textlint-util-to-string';
+import { matchPatterns } from '@textlint/regexp-string-matcher';
 
 const ignoreNodeManager = new IgnoreNodeManager();
 const gingerbreadAsync = promisify(gingerbread, { multiArgs: true });
@@ -36,7 +37,8 @@ function filterNode({ node, context }) {
   return { source, text };
 }
 
-function reporter(context) {
+function reporter(context, options = {}) {
+  const opts = Object.assign({ skipPatterns: [] }, options);
   const { Syntax, report, RuleError, fixer } = context;
 
   return {
@@ -49,37 +51,50 @@ function reporter(context) {
         }
 
         const [original, gingered, corrections] = await gingerbreadAsync(text);
+        const results = matchPatterns(text, opts.skipPatterns);
 
         // when no errors.
         if (original === gingered) {
           return;
         }
 
-        corrections.forEach((correction) => {
-          const index = correction.start;
-          const originalPosition = source.originalPositionFromIndex(index);
-          const originalRange = [
-            originalPosition.column,
-            originalPosition.column + correction.length,
-          ];
+        corrections
+          .filter(
+            (correction) =>
+              !results.some(
+                (result) =>
+                  result.startIndex >= correction.start &&
+                  correction.start + correction.length <= result.endIndex,
+              ),
+          )
+          .forEach((correction) => {
+            const index = correction.start;
+            const originalPosition = source.originalPositionFromIndex(index);
+            const originalRange = [
+              originalPosition.column,
+              originalPosition.column + correction.length,
+            ];
 
-          // if range is ignored, skip reporting
-          if (ignoreNodeManager.isIgnoredRange(originalRange)) {
-            return;
-          }
+            // if range is ignored, skip reporting
+            if (ignoreNodeManager.isIgnoredRange(originalRange)) {
+              return;
+            }
 
-          const fix = fixer.replaceTextRange(originalRange, correction.correct);
-          const message = `${correction.text} -> ${correction.correct}`;
+            const fix = fixer.replaceTextRange(
+              originalRange,
+              correction.correct,
+            );
+            const message = `${correction.text} -> ${correction.correct}`;
 
-          report(
-            node,
-            new RuleError(message, {
-              line: originalPosition.line - 1,
-              column: originalPosition.column,
-              fix,
-            }),
-          );
-        });
+            report(
+              node,
+              new RuleError(message, {
+                line: originalPosition.line - 1,
+                column: originalPosition.column,
+                fix,
+              }),
+            );
+          });
       })();
     },
   };

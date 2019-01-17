@@ -8,6 +8,12 @@ tester.run('ginger', rule, {
     'Hello, world!',
     'This sentence contains no mistakes.',
     'Misspellings in inline `codee` should be ignored.',
+    {
+      text: 'This link does not contain an [errror](index.html).',
+      options: {
+        skipPatterns: ['/err+or/'],
+      },
+    },
   ],
   invalid: [
     {

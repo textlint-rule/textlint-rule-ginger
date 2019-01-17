@@ -1,8 +1,7 @@
 {
   "name": "textlint-rule-ginger",
   "version": "2.1.2",
-  "description":
-    "textlint rule to check your English grammar with Ginger Proofreading",
+  "description": "textlint rule to check your English grammar with Ginger Proofreading",
   "engines": {
     "node": ">=6"
   },
@@ -16,14 +15,23 @@
     "precommit": "lint-staged",
     "prettier": "prettier --write \"**/*.{js,json,md}\""
   },
-  "files": ["lib", "src"],
-  "keywords": ["textlint", "rule", "english", "proofreading"],
+  "files": [
+    "lib",
+    "src"
+  ],
+  "keywords": [
+    "textlint",
+    "rule",
+    "english",
+    "proofreading"
+  ],
   "author": "nodaguti",
   "license": "MIT",
   "bugs": "https://github.com/textlint-rule/textlint-rule-ginger/issues",
   "homepage": "https://github.com/textlint-rule/textlint-rule-ginger",
   "repository": "textlint-rule/textlint-rule-ginger",
   "dependencies": {
+    "@textlint/regexp-string-matcher": "^1.0.2",
     "es6-promisify": "^5.0.0",
     "gingerbread": "^0.5.0",
     "textlint-rule-helper": "^2.0.0",
@@ -46,7 +54,13 @@
     "textlint-tester": "^3.0.3"
   },
   "lint-staged": {
-    "*.js": ["prettier", "git add"],
-    "*.json": ["prettier", "git add"]
+    "*.js": [
+      "prettier",
+      "git add"
+    ],
+    "*.json": [
+      "prettier",
+      "git add"
+    ]
   }
 }
