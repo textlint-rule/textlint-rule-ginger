@@ -25,9 +25,10 @@ $ textlint --rule textlint-rule-ginger text-to-proofread.txt
 ## Options
 
 * `skipPatterns`: `string[]`
-  * Set skip pattern that is detecting by [@textlint/regexp-string-matcher](https://github.com/textlint/regexp-string-matcher)
+  * Set skip pattern that is detected by [@textlint/regexp-string-matcher](https://github.com/textlint/regexp-string-matcher)
 
 You can set regexp-like string as skip patterns.
+
 For more details about regexp-like string, see [@textlint/regexp-string-matcher](https://github.com/textlint/regexp-string-matcher)
 
 ```json
