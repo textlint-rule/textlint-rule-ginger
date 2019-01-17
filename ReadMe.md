@@ -24,17 +24,19 @@ $ textlint --rule textlint-rule-ginger text-to-proofread.txt
 
 ## Options
 
-- `skipPatterns`: `string[]`
-    - Set skip pattern that is detecting by [@textlint/regexp-string-matcher](https://github.com/textlint/regexp-string-matcher)
+* `skipPatterns`: `string[]`
+  * Set skip pattern that is detecting by [@textlint/regexp-string-matcher](https://github.com/textlint/regexp-string-matcher)
 
 You can set regexp-like string as skip patterns.
 For more details about regexp-like string, see [@textlint/regexp-string-matcher](https://github.com/textlint/regexp-string-matcher)
 
 ```json
-"rule": {
-  "ginger": {
-    "skipPatterns": ["/JavaScript/i"]
-  }
+{
+    "rule": {
+      "ginger": {
+        "skipPatterns": ["/JavaScript/i"]
+      }
+    }
 }
 ```
 
