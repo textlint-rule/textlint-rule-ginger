@@ -70,9 +70,10 @@ function reporter(context, options = {}) {
           .forEach((correction) => {
             const index = correction.start;
             const originalPosition = source.originalPositionFromIndex(index);
+            const originalIndex = source.originalIndexFromIndex(index);
             const originalRange = [
-              originalPosition.column,
-              originalPosition.column + correction.length,
+              originalIndex,
+              originalIndex + correction.length,
             ];
 
             // if range is ignored, skip reporting
