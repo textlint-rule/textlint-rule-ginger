@@ -69,10 +69,10 @@ function reporter(context, options = {}) {
           )
           .forEach((correction) => {
             const index = correction.start;
-            const originalPosition = source.originalPositionFromIndex(index);
+            const originalIndex = source.originalIndexFromIndex(index);
             const originalRange = [
-              originalPosition.column,
-              originalPosition.column + correction.length,
+              originalIndex,
+              originalIndex + correction.length,
             ];
 
             // if range is ignored, skip reporting
@@ -89,8 +89,7 @@ function reporter(context, options = {}) {
             report(
               node,
               new RuleError(message, {
-                line: originalPosition.line - 1,
-                column: originalPosition.column,
+                index: originalIndex,
                 fix,
               }),
             );

@@ -59,5 +59,16 @@ tester.run('ginger', rule, {
         },
       ],
     },
+    {
+      text: 'This sentence contains\n newline and errror.',
+      output: 'This sentence contains\n newline and error.',
+      errors: [
+        {
+          message: 'errror -> error',
+          line: 2,
+          column: 14,
+        },
+      ],
+    },
   ],
 });
